@@ -4,10 +4,10 @@
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/LittleLemonAPI.git
+git clone https://github.com/sushrit7/Intelligent-Routing-for-Emergency-Services-in-Edwardsville
 ```
 
-cd LittleLemonAPI
+cd IntelligentRouting
 ### Set Up Virtual Environment and Install Dependencies
 ```bash
 
