@@ -20,10 +20,15 @@ def dijkstra(graph, start, end):
     
     return distances[end]  # Return the shortest distance to the end node
 
+
 def read_excel_file(file_path):
     df = pd.read_excel(file_path, index_col=0)
     graph = df.to_dict(orient='index')
     return graph
+
+## read_excel and print_graph NOT NEEDED (included in graph_tools file)
+##                            ^^^^^^^^^
+
 
 def print_graph(graph):
     for node in sorted(graph.keys()):
