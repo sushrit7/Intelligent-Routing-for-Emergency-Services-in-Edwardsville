@@ -79,20 +79,24 @@ def combine_results(shortest_paths):
             combined_shortest_path = path
     return combined_shortest_path
 
-file_path = 'adjmatrix.xlsx'  
-graph = read_excel_file(file_path)
 
-# Make adjacency matrix in the correct format
-graph = {int(k): v for k, v in graph.items()}
 
-# Get start and destination node
-start_node = int(input("Enter the starting node: "))
-goal_node = int(input("Enter the goal node: "))
 
-# Create an R-tree for spatial indexing
-rtree = create_rtree(graph)
 
-# Apply divide_and_conquer approach to find the shortest path and distance
-shortest_path, shortest_distance = divide_and_conquer(graph, rtree, rtree.bounds, start_node, goal_node)
-print("Shortest path:", shortest_path)
-print("Shortest distance:", shortest_distance)
+# file_path = 'adjmatrix.xlsx'  
+# graph = read_excel_file(file_path)
+
+# # Make adjacency matrix in the correct format
+# graph = {int(k): v for k, v in graph.items()}
+
+# # Get start and destination node
+# start_node = int(input("Enter the starting node: "))
+# goal_node = int(input("Enter the goal node: "))
+
+# # Create an R-tree for spatial indexing
+# rtree = create_rtree(graph)
+
+# # Apply divide_and_conquer approach to find the shortest path and distance
+# shortest_path, shortest_distance = divide_and_conquer(graph, rtree, rtree.bounds, start_node, goal_node)
+# print("Shortest path:", shortest_path)
+# print("Shortest distance:", shortest_distance)
