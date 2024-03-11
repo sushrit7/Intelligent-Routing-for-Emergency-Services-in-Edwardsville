@@ -32,8 +32,11 @@ def a_star(graph, start, goal):
     return None, float('inf')  # No path found
 
 def heuristic(node, goal):
-    # Placeholder heuristic function
-    return abs(node - goal)
+    if isinstance(node, str):  # Check if the node is a label
+        return abs(len(node) - len(goal))  # Calculate the difference in label lengths
+    else:  # If the node is an integer index
+        return abs(node - goal)  # Calculate the absolute difference between node indices
+
 
 def read_excel_file(file_path):
     df = pd.read_excel(file_path, index_col=0)
@@ -43,9 +46,10 @@ def create_rtree(graph):
     p = index.Property()
     rtree = index.Index(properties=p)
     # Insert nodes into the R-tree
-    for node, coords in graph.items():
-        rtree.insert(node, (node, node))  # Insert node with its coordinates directly
+    for node, _ in graph.items():
+        rtree.insert(node, (node, node))  # Insert node with its label directly
     return rtree
+
 
 def divide_and_conquer(graph, rtree, region, start, goal):
     # Base case: If the region contains a limited number of locations,
@@ -63,7 +67,7 @@ def divide_and_conquer(graph, rtree, region, start, goal):
     
     # Apply divide_and_conquer to each subregion
     for subregion in subregions:
-        subregion_coords = (subregion.bbox[0], subregion.bbox[1])
+        subregion_coords = subregion.bbox  # Pass the bounding box of the subregion
         path, distance = divide_and_conquer(graph, rtree, subregion_coords, start, goal)
         if distance < shortest_distance:
             shortest_path = path
@@ -72,31 +76,26 @@ def divide_and_conquer(graph, rtree, region, start, goal):
     return shortest_path, shortest_distance
 
 
+
 def combine_results(shortest_paths):
-    combined_shortest_path = shortest_paths[0]  
+    combined_shortest_path = shortest_paths[0] 
     for path in shortest_paths[1:]:
         if path is not None and (combined_shortest_path is None or len(path) < len(combined_shortest_path)):
             combined_shortest_path = path
     return combined_shortest_path
 
+def astar(graph, start_label, goal_label):
+    label_to_int = {label: i+1 for i, label in enumerate(['EB', 'EFI', 'EFII', 'EFIII', 'EPD', 'MPD', 'SPD', 'AH'])}
+    graph = {label_to_int[k]: {label_to_int[k2]: v2 for k2, v2 in v.items()} for k, v in graph.items()}
 
+    # Convert labels to integers for internal processing
+    start_node = label_to_int[start_label]
+    goal_node = label_to_int[goal_label]
 
+    # Create an R-tree for spatial indexing
+    rtree = create_rtree(graph)
 
+    # Apply divide_and_conquer approach to find the shortest path and distance
+    shortest_path, shortest_distance = divide_and_conquer(graph, rtree, rtree.bounds, start_node, goal_node)
 
-# file_path = 'adjmatrix.xlsx'  
-# graph = read_excel_file(file_path)
-
-# # Make adjacency matrix in the correct format
-# graph = {int(k): v for k, v in graph.items()}
-
-# # Get start and destination node
-# start_node = int(input("Enter the starting node: "))
-# goal_node = int(input("Enter the goal node: "))
-
-# # Create an R-tree for spatial indexing
-# rtree = create_rtree(graph)
-
-# # Apply divide_and_conquer approach to find the shortest path and distance
-# shortest_path, shortest_distance = divide_and_conquer(graph, rtree, rtree.bounds, start_node, goal_node)
-# print("Shortest path:", shortest_path)
-# print("Shortest distance:", shortest_distance)
+    return shortest_path, shortest_distance
