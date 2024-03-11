@@ -11,13 +11,14 @@ start_node = input("Enter the starting node: ")
 end_node = input("Enter the ending node: ")
 
 #Using Dijkstra's algorithm
+print()
 print("Using Dijkstra's algorithm:")
-print("Shortest distances from node", start_node, "to:")
 shortest_distance = Dijkstra.dijkstra(graph, start_node, end_node)
 print("Shortest distance from node", start_node, "to node", end_node, "is:", shortest_distance)
 
 
 # #Using A* algorithm
+print()
 # print("Using A* algorithm:")
 # print("Shortest distances from node", start_node, "to:")
 # # Create an R-tree for spatial indexing
@@ -29,6 +30,7 @@ print("Shortest distance from node", start_node, "to node", end_node, "is:", sho
 # print("Shortest distance:", shortest_distance)
 
 # Using Bellman-Ford algorithm
+print()
 print("Using Bellman-Ford algorithm:")
 print("Shortest distances from node", start_node, "to:")
 shortest_distances = Bellmanford.bellman_ford(graph, start_node)
