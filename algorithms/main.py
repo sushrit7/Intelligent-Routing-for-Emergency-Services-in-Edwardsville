@@ -4,7 +4,7 @@ import Dijkstra
 import astar
 import Bellmanford
 
-# Rest of the code remains the same
+#reading the graph from an excel file
 file_path = 'adjmatrix.xlsx'
 graph = graph_tools.read_excel_file(file_path)
 graph_tools.print_graph(graph)
@@ -30,8 +30,10 @@ print("Shortest distance:", shortest_distance)
 print()
 print("Using Bellman-Ford algorithm:")
 print("Shortest distances from node", start_node, "to:")
-shortest_distances = Bellmanford.bellman_ford(graph, start_node)
+shortest_distances, shortest_path = Bellmanford.bellman_ford(graph, start_node, end_node)
 print("Shortest distance from node", start_node, "to node", end_node, "is:", shortest_distances[end_node])
+print("Shortest path:", shortest_path)
+
 
 # for node, distance in shortest_distances.items():
 #     print(f"{node} : {distance}")
