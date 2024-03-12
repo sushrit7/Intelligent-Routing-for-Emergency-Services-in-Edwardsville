@@ -20,15 +20,11 @@ print("Shortest distance from node", start_node, "to node", end_node, "is:", sho
 
 # #Using A* algorithm
 print()
-# print("Using A* algorithm:")
-# print("Shortest distances from node", start_node, "to:")
-# # Create an R-tree for spatial indexing
-# rtree = astar.create_rtree(graph)
-
-# # Apply divide_and_conquer approach to find the shortest path and distance
-# shortest_path, shortest_distance = astar.divide_and_conquer(graph, rtree, rtree.bounds, start_node, end_node)
-# print("Shortest path:", shortest_path)
-# print("Shortest distance:", shortest_distance)
+print("Using A* algorithm:")
+print("From node", start_node, "to", end_node)
+shortest_path, shortest_distance = astar.astar(graph, start_node, end_node)
+print("Shortest path:", shortest_path)
+print("Shortest distance:", shortest_distance)
 
 # Using Bellman-Ford algorithm
 print()
