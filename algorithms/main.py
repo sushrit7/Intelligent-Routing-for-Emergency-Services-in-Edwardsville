@@ -31,6 +31,8 @@ print()
 print("Using Bellman-Ford algorithm:")
 print("Shortest distances from node", start_node, "to:")
 shortest_distances = Bellmanford.bellman_ford(graph, start_node)
-for node, distance in shortest_distances.items():
-    print(f"{node} : {distance}")
+print("Shortest distance from node", start_node, "to node", end_node, "is:", shortest_distances[end_node])
+
+# for node, distance in shortest_distances.items():
+#     print(f"{node} : {distance}")
 
