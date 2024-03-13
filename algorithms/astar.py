@@ -86,6 +86,8 @@ def combine_results(shortest_paths):
 
 def astar(graph, start_label, goal_label):
     label_to_int = {label: i+1 for i, label in enumerate(['EB', 'EFI', 'EFII', 'EFIII', 'EPD', 'MPD', 'SPD', 'AH'])}
+    int_to_label = {v: k for k, v in label_to_int.items()}  # Create a reverse mapping
+    
     graph = {label_to_int[k]: {label_to_int[k2]: v2 for k2, v2 in v.items()} for k, v in graph.items()}
 
     # Convert labels to integers for internal processing
@@ -97,5 +99,8 @@ def astar(graph, start_label, goal_label):
 
     # Apply divide_and_conquer approach to find the shortest path and distance
     shortest_path, shortest_distance = divide_and_conquer(graph, rtree, rtree.bounds, start_node, goal_node)
+    
+    # Convert integer node representations back to labels in the shortest path
+    shortest_path_labels = [int_to_label[node] for node in shortest_path]
 
-    return shortest_path, shortest_distance
+    return shortest_path_labels, shortest_distance
