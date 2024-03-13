@@ -7,32 +7,31 @@ import astar
 import Bellmanford
 import graph_tools
 
+def measuretime(graph, start_node, end_node, num_runs=10):
+    dijkstra_times = []
+    astar_times = []
+    bellmanford_times = []
 
+    for _ in range(num_runs):
+        # Dijkstra's algorithm
+        start_time = time.perf_counter()
+        Dijkstra.dijkstra(graph, start_node, end_node)
+        end_time = time.perf_counter()
+        dijkstra_times.append((end_time - start_time) * 1000)  # Convert to milliseconds
 
-def measuretime(graph, start_node, end_node):
-    # Dijkstra's algorithm
-    start_time = time.time()
-    Dijkstra.dijkstra(graph, start_node, end_node)
-    end_time = time.time()
-    dijkstra_seconds = end_time - start_time
-    dijkstra_milliseconds = dijkstra_seconds * 1000
+        # A* algorithm
+        start_time = time.perf_counter()    
+        astar.astar(graph, start_node, end_node)
+        end_time = time.perf_counter()
+        astar_times.append((end_time - start_time) * 1000)  # Convert to milliseconds
 
-    # A* algorithm
-    start_time = time.time()    
-    astar.astar(graph, start_node, end_node)
-    end_time = time.time()
-    astar_seconds = end_time - start_time
-    astar_milliseconds = astar_seconds * 1000
+        # Bellman-Ford algorithm     
+        start_time = time.perf_counter()
+        Bellmanford.bellman_ford(graph, start_node, end_node)
+        end_time = time.perf_counter()
+        bellmanford_times.append((end_time - start_time) * 1000)  # Convert to milliseconds
 
-    # Bellman-Ford algorithm     
-    start_time = time.time()
-    Bellmanford.bellman_ford(graph, start_node)
-    end_time = time.time()
-    bellmanford_seconds = end_time - start_time
-    bellmanford_milliseconds = bellmanford_seconds * 1000
-
-    return (dijkstra_seconds, dijkstra_milliseconds), (astar_seconds, astar_milliseconds), (bellmanford_seconds, bellmanford_milliseconds)
-
+    return (dijkstra_times, astar_times, bellmanford_times)
 
 #Expermient 1
 file_path = 'adjmatrix.xlsx'
@@ -41,16 +40,9 @@ graph_tools.print_graph(graph)
 start_node = input("Enter the starting node: ")
 end_node = input("Enter the ending node: ")
 
-dijkstra_time, astar_time, bellmanford_time = measuretime(graph, start_node, end_node)
-dijkstra_seconds, dijkstra_milliseconds = dijkstra_time
-astar_seconds, astar_milliseconds = astar_time
-bellmanford_seconds, bellmanford_milliseconds = bellmanford_time
+dijkstra_times, astar_times, bellmanford_times = measuretime(graph, start_node, end_node)
 
 print()
-print(f"Dijkstra's algorithm took {dijkstra_milliseconds:.5f} milliseconds")
-print(f"A* algorithm took {astar_milliseconds:.5f} milliseconds")
-print(f"Bellman-Ford algorithm took {bellmanford_milliseconds:.5f} milliseconds")
-
-
-
-
+print(f"Dijkstra's algorithm took average {sum(dijkstra_times) / len(dijkstra_times):.5f} milliseconds")
+print(f"A* algorithm took average {sum(astar_times) / len(astar_times):.5f} milliseconds")
+print(f"Bellman-Ford algorithm took average {sum(bellmanford_times) / len(bellmanford_times):.5f} milliseconds")

@@ -52,8 +52,10 @@ end_node = input("Enter the ending node: ")
 #Using Dijkstra's algorithm
 print()
 print("Using Dijkstra's algorithm:")
-shortest_distance = Dijkstra.dijkstra(graph, start_node, end_node)
-print("Shortest distance from node", start_node, "to node", end_node, "is:", shortest_distance)
+print("From node", start_node, "to", end_node)
+shortest_distance, shortest_path = Dijkstra.dijkstra(graph, start_node, end_node)
+print("Shortest path: ", shortest_path)
+print("Shortest distance: ", shortest_distance)
 
 
 # #Using A* algorithm
