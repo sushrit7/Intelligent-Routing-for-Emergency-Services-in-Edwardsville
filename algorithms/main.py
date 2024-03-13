@@ -14,14 +14,14 @@ end_node = input("Enter the ending node: ")
 #Using Dijkstra's algorithm
 print()
 print("Using Dijkstra's algorithm:")
-shortest_distance = Dijkstra.dijkstra(graph, start_node, end_node)
-print("Shortest distance from node", start_node, "to node", end_node, "is:", shortest_distance)
-
+print("From node", start_node, "to", end_node)
+shortest_distance, shortest_path = Dijkstra.dijkstra(graph, start_node, end_node)
+print("Shortest path: ", shortest_path)
+print("Shortest distance: ", shortest_distance)
 
 # #Using A* algorithm
 print()
 print("Using A* algorithm:")
-print("From node", start_node, "to", end_node)
 shortest_path, shortest_distance = astar.astar(graph, start_node, end_node)
 print("Shortest path:", shortest_path)
 print("Shortest distance:", shortest_distance)
@@ -29,10 +29,11 @@ print("Shortest distance:", shortest_distance)
 # Using Bellman-Ford algorithm
 print()
 print("Using Bellman-Ford algorithm:")
-print("Shortest distances from node", start_node, "to:")
+print("From node", start_node, "to", end_node)
 shortest_distances, shortest_path = Bellmanford.bellman_ford(graph, start_node, end_node)
-print("Shortest distance from node", start_node, "to node", end_node, "is:", shortest_distances[end_node])
 print("Shortest path:", shortest_path)
+print("Shortest distance:", shortest_distances[end_node])
+
 
 
 # for node, distance in shortest_distances.items():
