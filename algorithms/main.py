@@ -1,7 +1,7 @@
 # Importing necessary files
 import graph_tools
 import Dijkstra
-import astar
+import dac
 import Bellmanford
 
 #reading the graph from an excel file
@@ -19,10 +19,10 @@ shortest_distance, shortest_path = Dijkstra.dijkstra(graph, start_node, end_node
 print("Shortest path: ", shortest_path)
 print("Shortest distance: ", shortest_distance)
 
-# #Using A* algorithm
+# #Using Divide and Conquer algorithm
 print()
-print("Using A* algorithm:")
-shortest_path, shortest_distance = astar.astar(graph, start_node, end_node)
+print("Using Divide and Conquer algorithm:")
+shortest_path, shortest_distance = dac.divide_and_conquer(graph, start_node, end_node)
 print("Shortest path:", shortest_path)
 print("Shortest distance:", shortest_distance)
 
