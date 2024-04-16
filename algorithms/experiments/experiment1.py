@@ -3,7 +3,7 @@ import sys
 sys.path.append('..')
 import time
 import Dijkstra
-import astar
+import dac
 import Bellmanford
 import graph_tools
 
@@ -21,7 +21,7 @@ def measuretime(graph, start_node, end_node, num_runs=10):
 
         # A* algorithm
         start_time = time.perf_counter()    
-        astar.astar(graph, start_node, end_node)
+        dac.divide_and_conquer(graph, start_node, end_node)
         end_time = time.perf_counter()
         astar_times.append((end_time - start_time) * 1000)  # Convert to milliseconds
 
@@ -44,5 +44,5 @@ dijkstra_times, astar_times, bellmanford_times = measuretime(graph, start_node, 
 
 print()
 print(f"Dijkstra's algorithm took average {sum(dijkstra_times) / len(dijkstra_times):.5f} milliseconds")
-print(f"A* algorithm took average {sum(astar_times) / len(astar_times):.5f} milliseconds")
+print(f"Divide and Conquer algorithm took average {sum(astar_times) / len(astar_times):.5f} milliseconds")
 print(f"Bellman-Ford algorithm took average {sum(bellmanford_times) / len(bellmanford_times):.5f} milliseconds")
