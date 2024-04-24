@@ -13,3 +13,4 @@ python3 main.py
 ```
 
 ### Experiment
+there are experiment 1, 2 and 3. run it and get the results.
