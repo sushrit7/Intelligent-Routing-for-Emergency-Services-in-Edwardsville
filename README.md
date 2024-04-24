@@ -7,4 +7,9 @@
 git clone https://github.com/sushrit7/Intelligent-Routing-for-Emergency-Services-in-Edwardsville
 ```
 
+### Usage
+```bash
+python3 main.py 
+```
 
+### Experiment

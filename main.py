@@ -3,6 +3,7 @@ import graph_tools
 import Dijkstra
 import dac
 import Bellmanford
+import pandas as pd
 
 #reading the graph from an excel file
 file_path = 'adjmatrix.xlsx'
@@ -19,13 +20,6 @@ shortest_distance, shortest_path = Dijkstra.dijkstra(graph, start_node, end_node
 print("Shortest path: ", shortest_path)
 print("Shortest distance: ", shortest_distance)
 
-# #Using Divide and Conquer algorithm
-print()
-print("Using Divide and Conquer algorithm:")
-shortest_path, shortest_distance = dac.divide_and_conquer(graph, start_node, end_node)
-print("Shortest path:", shortest_path)
-print("Shortest distance:", shortest_distance)
-
 # Using Bellman-Ford algorithm
 print()
 print("Using Bellman-Ford algorithm:")
@@ -34,6 +28,12 @@ shortest_distances, shortest_path = Bellmanford.bellman_ford(graph, start_node, 
 print("Shortest path:", shortest_path)
 print("Shortest distance:", shortest_distances[end_node])
 
+#Using Divide and Conquer algorithm
+print()
+print("Using Divide and Conquer algorithm:")
+shortest_path, shortest_distance = dac.divide_and_conquer(graph, start_node, end_node)
+print("Shortest path:", shortest_path)
+print("Shortest distance:", shortest_distance)
 
 
 # for node, distance in shortest_distances.items():
