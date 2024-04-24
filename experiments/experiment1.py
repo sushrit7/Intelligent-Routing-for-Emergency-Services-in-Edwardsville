@@ -7,6 +7,8 @@ import Dijkstra
 import dac
 import Bellmanford
 import matplotlib.pyplot as plt
+import graph_tools
+import pandas as pd
 
 def generate_random_adjacency_matrix(num_nodes, max_distance=10):
     # Preallocate the adjacency matrix
@@ -70,6 +72,10 @@ dijkstra_avg_times = []
 dac_avg_times = []
 bellmanford_avg_times = []
 
+file_path = 'adjmatrix.xlsx'
+graph = graph_tools.read_excel_file(file_path)
+graph_tools.print_graph(graph)
+
 for size in sizes:
     adjacency_matrix = generate_random_adjacency_matrix(size)
     random_graphs[size] = adjacency_matrix_to_graph(adjacency_matrix)
@@ -100,6 +106,7 @@ for size in sizes:
     print(f"Divide and Conquer algorithm: {dac_avg_time:.5f} milliseconds")
     print(f"Bellman-Ford algorithm: {bellmanford_avg_time:.5f} milliseconds")
     print()
+
 
 # Plotting
 plt.figure(figsize=(10, 6))

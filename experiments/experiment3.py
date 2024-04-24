@@ -26,7 +26,7 @@ if __name__ == "__main__":
     print()
 
     updated_graph = graph
-    num = 20
+    num = 50
     congestion_level =[20, 40, 60, 80, 100]
     
     for n in range(num):
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         #     print("Congestion level must be between 1 and 10. Please try again.")
         #     raise ValueError("Invalid input")
 
-        new_weight = 0.5 * 80 + graph[edge[0]][edge[1]]
+        new_weight = float("infinity")
         print(f"New weight for edge {edge}: {new_weight}")
 
         weights[(edge[0], edge[1])] = new_weight
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     df = pd.DataFrame(results, columns=["From Node", "To Node", "Dijkstra_distance", "Divide_and_Conquer_distance", "Bellman-Ford_distance","Dijkstra_path","Divide_and_Conquer_path","Bellman-Ford_path"])
 
     # Save the DataFrame to an Excel file
-    df.to_excel("shortest_distances.xlsx", index=False)
+    df.to_excel("exp3.xlsx", index=False)
 
 
     # start_node = input("Enter the starting node: ")

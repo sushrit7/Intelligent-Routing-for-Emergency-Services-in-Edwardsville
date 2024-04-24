@@ -9,6 +9,32 @@ import graph_tools
 import random
 import pandas as pd
 
+def generate_random_adjacency_matrix(num_nodes, max_distance=10):
+    # Preallocate the adjacency matrix
+    adjacency_matrix = np.zeros((num_nodes, num_nodes), dtype=int)
+
+    # Fill the upper triangular part of the matrix (excluding the diagonal)
+    for i in range(num_nodes):
+        adjacency_matrix[i, i+1:] = np.random.randint(0, max_distance, size=num_nodes-i-1)
+
+    # Fill the lower triangular part of the matrix (excluding the diagonal) by transposing and filling again
+    adjacency_matrix += adjacency_matrix.T
+
+    return adjacency_matrix
+
+
+def adjacency_matrix_to_graph(adjacency_matrix):
+    # Convert the adjacency matrix to a graph dictionary
+    graph = {}
+    num_nodes = len(adjacency_matrix)
+    for i in range(num_nodes):
+        neighbors = {}
+        for j in range(num_nodes):
+            if adjacency_matrix[i][j] != 0:
+                neighbors[str(j)] = adjacency_matrix[i][j]
+        graph[str(i)] = neighbors
+    return graph
+
 def update_weights(graph, weights): 
     for edge, weight in weights.items():
         node1, node2 = edge
@@ -26,7 +52,7 @@ if __name__ == "__main__":
     print()
 
     updated_graph = graph
-    num = 20
+    num = 5
     congestion_level =[20, 40, 60, 80, 100]
     
     for n in range(num):
@@ -49,7 +75,7 @@ if __name__ == "__main__":
         #     print("Congestion level must be between 1 and 10. Please try again.")
         #     raise ValueError("Invalid input")
 
-        new_weight = 0.5 * 80 + graph[edge[0]][edge[1]]
+        new_weight = 0.5 * congestion_level[n] + graph[edge[0]][edge[1]]
         print(f"New weight for edge {edge}: {new_weight}")
 
         weights[(edge[0], edge[1])] = new_weight
