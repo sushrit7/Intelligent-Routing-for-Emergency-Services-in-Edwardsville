@@ -46,23 +46,23 @@ def measuretime(graph, start_node, end_node, num_runs=10):
         start_time = time.perf_counter()
         Dijkstra.dijkstra(graph, start_node, end_node)
         end_time = time.perf_counter()
-        dijkstra_times.append((end_time - start_time) * 1000)  # Convert to milliseconds
+        dijkstra_times.append((end_time - start_time) * 1000)  
 
         # Divide and Conquer algorithm
         start_time = time.perf_counter()    
         dac.divide_and_conquer(graph, start_node, end_node)
         end_time = time.perf_counter()
-        dac_times.append((end_time - start_time) * 1000)  # Convert to milliseconds
+        dac_times.append((end_time - start_time) * 1000)  
 
         # Bellman-Ford algorithm     
         start_time = time.perf_counter()
         Bellmanford.bellman_ford(graph, start_node, end_node)
         end_time = time.perf_counter()
-        bellmanford_times.append((end_time - start_time) * 1000)  # Convert to milliseconds
+        bellmanford_times.append((end_time - start_time) * 1000)  
 
     return (dijkstra_times, dac_times, bellmanford_times)
 
-# Generate random graphs for different sizes
+# Generateing random graphs for different sizes
 sizes = [16, 32, 64, 128, 512, 1024]
 random_graphs = {}
 matrix_sizes = []
@@ -90,7 +90,7 @@ for size in sizes:
         end_node = random.choice(list(random_graphs[size].keys()))
         dijkstra_times, dac_times, bellmanford_times = measuretime(random_graphs[size], start_node, end_node)
         
-        # Calculate the average time for each algorithm
+        # Calculating the average time for each algorithm
         dijkstra_avg_time = sum(dijkstra_times) / len(dijkstra_times)
         dac_avg_time = sum(dac_times) / len(dac_times)
         bellmanford_avg_time = sum(bellmanford_times) / len(bellmanford_times)
