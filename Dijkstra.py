@@ -2,7 +2,7 @@
 import heapq
 import pandas as pd
 
-# main function
+# main function finding the shortest path
 def dijkstra(graph, start, end):
     # initializing the dictionary with every element as infinity
     distances = {node: float('infinity') for node in graph}
