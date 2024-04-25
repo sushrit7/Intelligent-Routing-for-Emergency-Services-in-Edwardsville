@@ -27,7 +27,7 @@ def dijkstra(graph, start, end):
                 previous_nodes[neighbor] = current_node
                 heapq.heappush(priority_queue, (distance, neighbor))
 
-    # initializing the empty list to get the path stored between nodes
+    # initializing the empty list to get the path stored between nodes, to get the shortest path
     shortest_path = []
     node = end
     while node is not None:
